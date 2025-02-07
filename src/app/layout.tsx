@@ -2,7 +2,7 @@
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { useTheme } from "../hooks/useTheme";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,16 +19,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { theme, toggleTheme } = useTheme();
-
   return (
     <html lang="en" className="">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100 dark:bg-[#0b0b0b] text-gray-900 dark:text-gray-100`}
       >
-        <button onClick={toggleTheme}>
-          Toggle to {theme === "light" ? "dark" : "light"} mode
-        </button>
+        <div className="relative flex justify-end items-center px-10">
+          Switch Theme: 
+          <ThemeToggle />
+        </div>
         {children}
       </body>
     </html>
