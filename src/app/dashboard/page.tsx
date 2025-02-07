@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { Token } from "@/types";
-import TokenTable from "../components/TokenTable";
-import QuickSearch from "../components/QuickSearch";
+import TokenTable from "../../components/TokenTable";
+import QuickSearch from "../../components/QuickSearch";
 
 export default function Dashboard() {
   const [tokenList, setTokenList] = useState<Token[]>([]);
