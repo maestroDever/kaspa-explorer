@@ -1,13 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Token } from "@/types";
 import TokenTable from "../components/TokenTable";
+import QuickSearch from "../components/QuickSearch";
 
 export default function Dashboard() {
   const [tokenList, setTokenList] = useState<Token[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [search, setSearch] = useState<string>("");
 
   useEffect(() => {
     fetch("https://tn10api.kasplex.org/v1/krc20/tokenlist")
@@ -19,7 +21,7 @@ export default function Dashboard() {
             max: Number(max),
             lim: Number(lim),
             minted: Number(minted),
-            pre: Number(pre),
+            pre: Number(pre)
           }))
         );
       })
@@ -32,6 +34,14 @@ export default function Dashboard() {
       });
   }, []);
 
+  const filteredTokenList = useMemo(
+    () =>
+      tokenList.filter((token) =>
+        token.tick.toLowerCase().includes(search.toLowerCase())
+      ),
+    [tokenList, search]
+  );
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -42,13 +52,21 @@ export default function Dashboard() {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-      <div className="mt-12">
+      <div className="mt-12 flex items-center">
         <h1 className="text-2xl font-bold">KRC-20 Token List</h1>
+
+        <div className="ml-auto">
+          <QuickSearch
+            placeholder="Search by ticker"
+            value={search}
+            onChange={setSearch}
+          />
+        </div>
       </div>
       <div className="mt-8 flow-root">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8 h-[80vh]">
-            <TokenTable tokenList={tokenList} />
+            <TokenTable tokenList={filteredTokenList} />
           </div>
         </div>
       </div>
