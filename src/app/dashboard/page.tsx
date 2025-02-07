@@ -6,23 +6,39 @@ import TokenTable from "../components/TokenTable";
 
 export default function Dashboard() {
   const [tokenList, setTokenList] = useState<Token[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("https://tn10api.kasplex.org/v1/krc20/tokenlist")
       .then((response) => response.json())
-      .then((data) =>
+      .then((data) => {
         setTokenList(
           data.result.map(({ max, lim, minted, pre, ...other }: Token) => ({
             ...other,
             max: Number(max),
             lim: Number(lim),
             minted: Number(minted),
-            pre: Number(pre)
+            pre: Number(pre),
           }))
-        )
-      )
-      .catch((error) => console.error("Error fetching token list:", error));
+        );
+      })
+      .catch((error) => {
+        console.error("Error fetching token list:", error);
+        setError("Failed to fetch token list.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
