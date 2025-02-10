@@ -16,11 +16,19 @@ export default function Dashboard() {
   const [nextToken, setNextToken] = useState<string | null>(null);
 
   const fetchTokenList = ({
-    prev = "",
-    next = ""
+    prev,
+    next
   }: { prev?: string; next?: string } = {}) => {
     setLoading(true);
-    fetch(`${API_ENDPOINT}?prev=${prev}&next=${next}`)
+    const queryParams = [prev && `prev=${prev}`, next && `next=${next}`].filter(
+      Boolean
+    );
+
+    const url = queryParams.length
+      ? `${API_ENDPOINT}?${queryParams.join("&")}`
+      : API_ENDPOINT;
+
+    fetch(url)
       .then((response) => response.json())
       .then((data) => {
         setTokenList(
