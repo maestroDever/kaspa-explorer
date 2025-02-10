@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nacho the Kat – Frontend Coding Assessment
 
-## Getting Started
+## Objective
+Build a modern, simple, and functional Kaspa Token Explorer using Next.js, Tailwind CSS, and RESTful API calls. This small app will fetch and display token details from a provided API and should be built in a serverless manner (deployable on Cloudflare Pages).
 
-First, run the development server:
+## Requirements
+- Create a Next.js app that displays information about a specific KRC20 token (e.g., NACHO token on Kaspa).
+- Use Tailwind CSS for styling and create a clean, responsive UI.
+- Fetch token data from the Kasplex Token API (we will provide a test API endpoint).
+- Display the following token details:
+  - Token Logo
+  - Token Name
+  - Token Ticker
+  - Total Supply
+  - Holders Count
+  - Latest Transactions (last 50 transactions)
+- Allow the user to search for any Kaspa token by Ticker and update the UI dynamically.
+- Ensure the app is serverless (no backend required) and Cloudflare Pages-compatible.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Bonus (Optional, if time permits)
+- Implement a dark mode toggle using Tailwind.
+- Add a simple loading state while fetching data.
+- Use TypeScript for better type safety.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Submission
+- Provide a GitHub repository with your solution.
+- Include a README with setup instructions.
+- Deployment is not required, but we will deploy it live in the interview.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## API Documentation for Kaspa Tokens
+- [Kasplex Indexer API Documentation](https://docs.kasplex.org/tools-and-reference/kasplex-indexer-api/krc-20)
+- Mainnet Base URL: `https://api.kasplex.org`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Evaluation Criteria
+- Code quality (clean, modular, and well-structured).
+- Proper usage of Next.js, Tailwind CSS, and RESTful API integration.
+- UI/UX considerations (should be simple yet intuitive).
+- Ability to handle dynamic data updates (search functionality).
