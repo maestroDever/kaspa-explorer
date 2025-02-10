@@ -42,14 +42,6 @@ export default function Dashboard() {
     [tokenList, search]
   );
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="mt-12 flex items-center">
@@ -66,7 +58,7 @@ export default function Dashboard() {
       <div className="mt-8 flow-root">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8 h-[80vh]">
-            <TokenTable tokenList={filteredTokenList} />
+            <TokenTable tokenList={filteredTokenList} loading={loading} error={error} />
           </div>
         </div>
       </div>

@@ -1,7 +1,13 @@
 import { Token } from "@/types";
 import { formatPercentage } from "@/utils";
 
-export default function TokenTable({ tokenList }: { tokenList: Token[] }) {
+type TokenTableProps = {
+  tokenList: Token[];
+  loading: boolean;
+  error: string | null;
+}
+
+export default function TokenTable({ tokenList, loading, error }: TokenTableProps) {
   return (
     <table className="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
       <thead>
@@ -69,6 +75,16 @@ export default function TokenTable({ tokenList }: { tokenList: Token[] }) {
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
+        {loading && (
+          <tr>
+            <td colSpan={100} className="text-center p-10">Loading...</td>
+          </tr>
+        )}
+        {error && (
+          <tr>
+            <td colSpan={100} className="text-center p-10 text-red-500">Error: {error}</td>
+          </tr>
+        )}
         {tokenList.map((token) => (
           <tr key={token.tick}>
             <td className="sticky left-0 whitespace-nowrap py-5 pl-4 px-3 text-sm bg-white dark:bg-gray-800">
