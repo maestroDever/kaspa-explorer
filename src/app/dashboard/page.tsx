@@ -12,7 +12,7 @@ export default function Dashboard() {
   const [search, setSearch] = useState<string>("");
 
   useEffect(() => {
-    fetch("https://tn10api.kasplex.org/v1/krc20/tokenlist")
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/krc20/tokenlist`)
       .then((response) => response.json())
       .then((data) => {
         setTokenList(
